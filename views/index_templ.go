@@ -26,7 +26,7 @@ func template() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><title>Document</title></head><body>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"><link href=\"https://cdn.jsdelivr.net/npm/daisyui@4.12.10/dist/full.min.css\" rel=\"stylesheet\" type=\"text/css\"><script src=\"https://unpkg.com/htmx.org@2.0.2\" integrity=\"sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ\" crossorigin=\"anonymous\"></script><script src=\"https://cdn.tailwindcss.com\"></script></head><body>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -72,7 +72,7 @@ func Home() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div>My Homepage</div>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex flex-col justify-center items-center\"><h1 class=\"text-2xl py-5 text-center\">Welcome to Search Settings</h1><form class=\"flex flex-col justify-center items-center gap-5 py-5\" hx-post=\"/\" hx-target=\"#feedback\" hx-indicator=\"#indicator\"><label class=\"input input-bordered flex items-center gap-2 w-full\">URLs per hour <input type=\"text\" class=\"grow\" name=\"amount\" placeholder=\"5\"></label><div class=\"flex flex-col \"><div class=\"form-control w-52\"><label class=\"label cursor-pointer\"><span class=\"label-text\">Search On:</span> <input type=\"checkbox\" class=\"toggle\" name=\"searchOn\" checked=\"checked\"></label></div><div class=\"form-control w-52\"><label class=\"label cursor-pointer\"><span class=\"label-text\">Add new URLs:</span> <input type=\"checkbox\" class=\"toggle\" name=\"addNew\" checked=\"checked\"></label></div></div><button class=\"btn\" type=\"submit\">Submit</button><div id=\"indicator\" class=\"htmx-indicator\"><div><span class=\"loading loading-ring loading-lg text-primary h-20 w-20\"></span></div></div><div id=\"feedback\"></div></form></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
