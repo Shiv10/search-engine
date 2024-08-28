@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"search-engine/db"
 	"search-engine/routes"
 	"syscall"
 	"time"
@@ -34,7 +35,7 @@ func main() {
 	})
 
 	app.Use(compress.New())
-
+	db.InitDB()
 	routes.SetRoutes(app)
 
 	// Start server and listen for shutdown

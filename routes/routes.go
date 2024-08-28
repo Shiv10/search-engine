@@ -1,22 +1,11 @@
 package routes
 
 import (
-	"search-engine/views"
+	"search-engine/db"
 
 	"github.com/a-h/templ"
 	"github.com/gofiber/fiber/v2"
 )
-
-type loginform struct {
-	Email string `form:"email"`
-	Password string `form:"password"`
-}
-
-type settingsform struct {
-	Amount int `form:"amount"`
-	SearchOn bool `form:"searchOn"`
-	AddNew bool `form:"addNew"`
-}
 
 func render(c *fiber.Ctx, component templ.Component) error {
 	c.Set("Content-Type", "text/html")
@@ -24,27 +13,17 @@ func render(c *fiber.Ctx, component templ.Component) error {
 }
 
 func SetRoutes(app *fiber.App) {
-	app.Get("/", func(c *fiber.Ctx) error {
-		return render(c, views.Home())
-	})
+	app.Get("/", AuthMiddleware, DashboardHandler)
 
-	app.Post("/", func(c *fiber.Ctx) error {
-		input := settingsform{}
-		if err := c.BodyParser(&input); err != nil {
-			c.SendString("<h2>Error: Something went wrong</h2>")
-		}
-		return c.SendStatus(200)
-	})
+	app.Post("/", AuthMiddleware, DashboardPostHandler)
 
-	app.Get("/login", func(c *fiber.Ctx) error {
-		return render(c, views.Login())
-	})
+	app.Get("/login", LoginHandler)
 
-	app.Post("/login", func(c *fiber.Ctx) error {
-		input := loginform{}
-		if err := c.BodyParser(&input); err != nil {
-			c.SendString("<h2>Error: Something went wrong</h2>")
-		}
-		return c.SendStatus(200)
+	app.Post("/login", LoginPostHandler)
+
+	app.Get("/create", func(c *fiber.Ctx) error {
+		u := &db.User{}
+		u.CreateAdmin()
+		return c.SendString("created")
 	})
 }
