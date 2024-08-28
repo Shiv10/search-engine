@@ -21,6 +21,8 @@ func SetRoutes(app *fiber.App) {
 
 	app.Post("/login", LoginPostHandler)
 
+	app.Post("/logout", LogoutHandler)
+
 	app.Get("/create", func(c *fiber.Ctx) error {
 		u := &db.User{}
 		u.CreateAdmin()
