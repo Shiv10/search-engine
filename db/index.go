@@ -27,7 +27,7 @@ func InitDB() {
 		panic(err)
 	}
 
-	err = DBConn.AutoMigrate(&User{}, &SearchSetting{})
+	err = DBConn.AutoMigrate(&User{}, &SearchSetting{}, &CrawledUrl{})
 	if err != nil {
 		panic(err)
 	}
